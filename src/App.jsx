@@ -1,26 +1,29 @@
+// Import the TodoForm component which displays the list of todos
+import TodoForm from './TodoForm.jsx';
+
+// Import the TodoList component which displays the list of todos
+import TodoList from './TodoList.jsx';
+
+// Import CSS styles for this component
 import './App.css'
 
+// Main App component
 function App() {
-  
-const todolist = [
-  {id: 1, title: "review resources"},
-  {id: 2, title: "take notes"},
-  {id: 3, title: "code out app"}
-]
-
 
   return (
     <div>
-      <h1>My Todos</h1>
+      {/* Main heading for the application */}
+      <h1>Todo List</h1>
 
-      <ul>
-        {todolist.map (todo => (
-        <li key ={todo.id}>{todo.title}</li>
-        ))}
-      </ul>
+      {/* Form component where users will eventually add new todos */}
+      <TodoForm />
 
+      {/* Component responsible for displaying all todos */}
+      <TodoList />
+      
     </div>
   )
 }
 
+// Export the App component so it can be used by main.jsx
 export default App
