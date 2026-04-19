@@ -1,22 +1,12 @@
+import TodoListItem from "./TodoListItem";
+
 // TodoList component is responsible for displaying all todos
-function TodoList () {
-
-  // Array that stores the todo items
-  const todolist = [
-  {id: 1, title: "review resources"},
-  {id: 2, title: "take notes"},
-  {id: 3, title: "code out app"}
-]
-
+function TodoList({ todoList }) {
   return (
-    // Unordered list that will display each todo
+  
     <ul>
-
-        {/* Loop through the todoList array and render each item */}
-        {todolist.map (todo => (
-
-         {/* Key helps React track each list item efficiently */} 
-        <li key ={todo.id}>{todo.title}</li>
+        {todoList.map(todo => (
+          <TodoListItem key={todo.id} todo={todo} />
         ))}
       </ul>
   );
