@@ -40,11 +40,22 @@ function addTodo(todoTitle) {
   const newTodo = {
     id: Date.now(),     // Generate a unique id
     title: todoTitle,   // Store the todo text 
+    isCompleted: false, // ✅  NEW
   };
 
   // Add new todo to the beginning of the list
   // Functional update ensures we use the latest state
   setTodoList((prev) => [newTodo, ...prev]);
+}
+
+function completeTodo(id) {
+  const updatedTodos = todoList.map((todo) => {
+    if (todo.id === id) {
+      return {...todo, isCompleted: true};
+    }
+    return todo;
+  });
+  setTodoList(updatedTodos);
 }
 
   return (
@@ -65,7 +76,10 @@ function addTodo(todoTitle) {
         - Receives the todoList state as a prop
         - Responsible for rendering all todo items
       */}
-      <TodoList  todoList={todoList} />
+      <TodoList  
+      todoList={todoList} 
+      onCompleteTodo={completeTodo}
+      />
     
     </div>
   );
@@ -73,3 +87,12 @@ function addTodo(todoTitle) {
 
 // Export the App component so it can be used by main.jsx
 export default App
+
+/*
+COMPLETE TODO FUNCTION
+
+This function updates a specific todo by setting isCompleted to true.
+
+We use map() to create a new array instead of mutating state directly.
+which follows React's immutability principles.
+*/
