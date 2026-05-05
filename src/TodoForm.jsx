@@ -55,6 +55,7 @@ const inputRef = useRef(null);
       <input    
         ref={inputRef} 
         type="text"
+        id="todoTitle"
         value={workingTodoTitle}
         onChange={(event) => setWorkingTodoTitle(event.target.value)}
         placeholder={'Todo text'}
