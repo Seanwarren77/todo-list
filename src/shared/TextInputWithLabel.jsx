@@ -1,4 +1,4 @@
-function TextInpputWithLabel ({
+function TextInputWithLabel ({
   elementId,
   labelText,
   onChange,

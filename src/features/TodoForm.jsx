@@ -1,27 +1,29 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import TextInputWithLabel from "../shared/TextInputWithLabel";
 import { isValidTodoTitle } from "../utils/todoValidation";
 
 
 
 function TodoForm ( { onAddTodo }) {
-  // useRef is used to directly access the input DOM element
-  // This allows us to. manually focus the input after submission
+ 
   const inputRef = useRef();
 
-  
+  const [workingTodoTitle, setWorkingTodoTitle] = useState("");
 
-  const handleAddTodo = (event) => {
+  function handleTitleChange(event) {
+    setWorkingTodoTitle(event.target.value);
+  }
+
+  function handleAddTodo(event) {
     event.preventDefault();
+    const trimmedTitle = workingTodoTitle.trim();
 
+    if (isValidTodoTitle(trimmedTitle)) {
 
-    const todoTitle = event.target.todoTitle.value.trim();
+      onAddTodo(trimmedTitle);
+      setWorkingTodoTitle("");
 
-    // Only add todo if input is not empty
-    if (todoTitle) {
-      onAddTodo(todoTitle);      // Send data to parent (App.jsx)
-      event.target.reset();      // Clear the input field
-      inputRef.current.focus();  // Keep cursor in input field  
+      inputRef.current.focus();
     }
   }
 
@@ -32,9 +34,9 @@ function TodoForm ( { onAddTodo }) {
       <TextInputWithLabel
         elementId="todoTitle"
         labelText="Todo"
-        ref={todoTitleInput}
+        ref={inputRef}
         value={workingTodoTitle}
-        onChange={handleAddTodo}
+        onChange={handleTitleChange}
         />
 
    
