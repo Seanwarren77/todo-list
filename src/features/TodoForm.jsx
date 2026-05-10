@@ -1,17 +1,7 @@
 import { useRef } from "react";
+import TextInputWithLabel from "../shared/TextInputWithLabel";
 
-/*
- TodoForm component 
 
- This component handles user input for adding new todos.
-
- Key responsibilities:
- - Capture user input from the form
- - Prevent default form submission behavior
- - Send the new todo data to the parent component
- - Reset the form after submission
- - Keep the input focused using useRef
- */
 
 function TodoForm ( { onAddTodo }) {
   // useRef is used to directly access the input DOM element
