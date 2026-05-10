@@ -1,12 +1,6 @@
 import { useState } from "react";
-
-// Import the TodoForm component which allows users to add new todos
-import TodoForm from './TodoForm.jsx';
-
-// Import the TodoList component which displays the list of todos
-import TodoList from './TodoList.jsx';
-
-// Import CSS styles for this component
+import TodoForm from './features/TodoForm';
+import TodoList from './features/TodoList/TodoList';
 import './App.css'
 
 /*

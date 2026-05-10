@@ -18,22 +18,12 @@ function TodoForm ( { onAddTodo }) {
   // This allows us to. manually focus the input after submission
   const inputRef = useRef();
 
-  /*
-    handleAddTodo
-
-    This function runs when the form is submitted.
-    It:
-      - Prevents page reload
-      - Retrieves the input value
-      - Calls the parent function to add a todo
-      - Resets the form
-      - Refocuses the input field
-  */
+  
 
   const handleAddTodo = (event) => {
     event.preventDefault();
 
-    // Get and clean the input value (.trim removes extra whitespace)
+
     const todoTitle = event.target.todoTitle.value.trim();
 
     // Only add todo if input is not empty
@@ -60,7 +50,7 @@ function TodoForm ( { onAddTodo }) {
         required 
       />
 
-    {/* Submit button triggers form submission */}
+   
       <button type="submit">
         Add Todo 
         </button>
@@ -68,5 +58,5 @@ function TodoForm ( { onAddTodo }) {
   );
 }
 
-// Export component so it can be used in App.jsx
+
 export default TodoForm; 
