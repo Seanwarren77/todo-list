@@ -1,4 +1,5 @@
-import { useRef } from "react";
+
+import { useState, useRef } from "react";
 
 /*
  TodoForm component 
@@ -6,17 +7,19 @@ import { useRef } from "react";
  This component handles user input for adding new todos.
 
  Key responsibilities:
- - Capture user input from the form
+ - Capture user input using a controlled component
  - Prevent default form submission behavior
  - Send the new todo data to the parent component
  - Reset the form after submission
- - Keep the input focused using useRef
+ - Maintain input focus after submission using useRef
  */
 
 function TodoForm ( { onAddTodo }) {
-  // useRef is used to directly access the input DOM element
-  // This allows us to. manually focus the input after submission
-  const inputRef = useRef();
+  // State to control the input field value
+  const [workingTodoTitle, setWorkingTodoTitle] =useState("");
+
+// Ref to keep track of the input element for focus control
+const inputRef = useRef(null);
 
   /*
     handleAddTodo
@@ -24,25 +27,23 @@ function TodoForm ( { onAddTodo }) {
     This function runs when the form is submitted.
     It:
       - Prevents page reload
-      - Retrieves the input value
+      - Validates input (ignores empty/whitespace)
       - Calls the parent function to add a todo
-      - Resets the form
-      - Refocuses the input field
+      - Clears the input field
+      - Refocuses the input for better UX
   */
 
   const handleAddTodo = (event) => {
     event.preventDefault();
 
-    // Get and clean the input value (.trim removes extra whitespace)
-    const todoTitle = event.target.todoTitle.value.trim();
 
-    // Only add todo if input is not empty
-    if (todoTitle) {
-      onAddTodo(todoTitle);      // Send data to parent (App.jsx)
-      event.target.reset();      // Clear the input field
-      inputRef.current.focus();  // Keep cursor in input field  
+
+    if (workingTodoTitle.trim()) {
+      onAddTodo(workingTodoTitle);      
+      setWorkingTodoTitle("");     // Reset input
+      inputRef.current.focus();    // Keep focus on input
     }
-  }
+  };
 
   return (
     // onSubmit ensures both button click and Enter key work
@@ -50,18 +51,19 @@ function TodoForm ( { onAddTodo }) {
       {/* Label connected to input for accessibility */}
       <label htmlFor="todoTitle">Todo</label>
 
-      {/* Input field for entering todo text */}
-      <input 
-        ref={inputRef}    // Connect ref to DOM element     
+      {/* Controlled input field */}
+      <input    
+        ref={inputRef} 
         type="text"
-        id="todoTitle" 
-        name="todoTitle"     // Required to access value via event
+        id="todoTitle"
+        value={workingTodoTitle}
+        onChange={(event) => setWorkingTodoTitle(event.target.value)}
         placeholder={'Todo text'}
         required 
       />
 
-    {/* Submit button triggers form submission */}
-      <button type="submit">
+    {/* Submit button (disabled if input is empty or whitespace) */}
+      <button type="submit" disabled={!workingTodoTitle.trim()}>
         Add Todo 
         </button>
     </form>
@@ -70,3 +72,17 @@ function TodoForm ( { onAddTodo }) {
 
 // Export component so it can be used in App.jsx
 export default TodoForm; 
+
+/* 
+  CONTROLLED COMPONENT
+
+  The input value is controlled by React state.
+
+  Benefits:
+  - React always knows the input value
+  - Easier validation and control
+
+  BUTTON DISABLE
+
+  The button is disabled if the input is empty or only whitespace.
+*/
