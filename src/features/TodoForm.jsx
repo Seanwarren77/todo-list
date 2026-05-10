@@ -27,18 +27,14 @@ function TodoForm ( { onAddTodo }) {
   return (
     // onSubmit ensures both button click and Enter key work
     <form onSubmit={handleAddTodo}>
-      {/* Label connected to input for accessibility */}
-      <label htmlFor="todoTitle">Todo</label>
-
-      {/* Input field for entering todo text */}
-      <input 
-        ref={inputRef}    // Connect ref to DOM element     
-        type="text"
-        id="todoTitle" 
-        name="todoTitle"     // Required to access value via event
-        placeholder={'Todo text'}
-        required 
-      />
+      
+      <TextInputWithLabel
+        elementId="todoTitle"
+        labelText="Todo"
+        ref={todoTitleInput}
+        value={workingTodoTitle}
+        onChange={handleAddTodo}
+        />
 
    
       <button type="submit">
