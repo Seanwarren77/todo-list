@@ -18,22 +18,21 @@ function addTodo(todoTitle) {
 }
 
 function completeTodo(id) {
-
   const updatedTodos = todoList.map((todo) => {
-
     if (todo.id === id) {
-
       return {
         ...todo,
-        isCompleted: !todo.isCompleted,
-      };
+         isCompleted: !todo.isCompleted,
+        };
     }
-    return todo;
-});
 
-setTodoList(updatedTodos);
+    return todo;
+  });
+
+  setTodoList(updatedTodos);
 }
 
+  
 function updateTodo(editedTodo) {
   const updatedTodos = todoList.map((todo) => {
     if (todo.id === editedTodo.id) {
@@ -41,6 +40,7 @@ function updateTodo(editedTodo) {
         ...editedTodo,
       };
     }
+
     return todo;
   });
 
@@ -59,10 +59,10 @@ function updateTodo(editedTodo) {
       onCompleteTodo={completeTodo}
       onUpdateTodo={updateTodo}
        />
-    
+
     </div>
   );
 }
 
 
-export default App
+export default App;
