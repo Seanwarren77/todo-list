@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
 function Logon({
-  onSetEmail = () => {},
-  onSetToken = () => {},
+  onSetEmail,
+  onSetToken,
 }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,7 +22,7 @@ function Logon({
           'Content-Type': 'application/json',
         },
         credentials: 'include',
-        body: JSON.stringfy({
+        body: JSON.stringify({
           email,
           password,
         }),
