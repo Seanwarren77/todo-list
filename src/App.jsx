@@ -1,12 +1,29 @@
+import { useState } from 'react';
 import Header from './shared/Header';
-import TodosPage from './features/Todos/TodosPage';
+import TodosPage from './features/Todos/TodoList/TodosPage';
+import Logon from './features/Logon';
 import './App.css';
 
 function App() {
+  const [email, setEmail] = useState('');
+  const [token, setToken] = useState('');
+
  return (
   <>
-  <Header />
-  <TodosPage />
+  <Header 
+    token={token}
+    onSetToken={setToken}
+    onSetEmail={setEmail}
+  />
+
+  {token ? (
+    <TodosPage  token={token} />
+  ) : (
+    <Logon
+    onSetEmail={setEmail}
+    onSetToken={setToken}
+    />
+  )}
   </>
  );
 }
