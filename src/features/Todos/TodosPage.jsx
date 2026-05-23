@@ -74,7 +74,7 @@ function TodosPage({ token }) {
   setTodoList((prev) =>
   prev.map((todo) =>
   todo.id === tempTodo.id
-  ? savedTodo.task
+  ? savedTodo
   : todo
   )
 );
@@ -92,14 +92,12 @@ function TodosPage({ token }) {
       (todo) => todo.id === id
     );
 
-    const updatedTodo = {
-      ...originalTodo,
-      isCompleted: true,
-    };
 
     setTodoList((prev) => 
     prev.map((todo) =>
-    todo.id === id ? updatedTodo : todo
+    todo.id === id
+     ? { ...todo, isCompleted: true }
+     : todo
     )
   );
 
@@ -113,7 +111,6 @@ function TodosPage({ token }) {
       credentials: 'include',
       body: JSON.stringify({
         isCompleted: true,
-        createdAt: originalTodo.createdAt,
       }),
     });
 
@@ -156,7 +153,6 @@ try {
       body: JSON.stringify({
         title: editedTodo.title,
         isCompleted: editedTodo.isCompleted,
-        createdAt: editedTodo.createdAt,
       }),
     }
   );

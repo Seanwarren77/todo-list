@@ -28,7 +28,13 @@ function Logon({
         }),
       });
 
-      const data = await response.json();
+      let data = {};
+
+      try {
+        data = await response.json();
+      } catch {
+        data = {};
+      }
 
       if (
         response.status === 200 &&
