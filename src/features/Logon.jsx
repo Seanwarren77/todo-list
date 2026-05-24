@@ -32,8 +32,10 @@ function Logon({
 
       try {
         data = await response.json();
-      } catch {
-        data = {};
+      } catch (error) {
+        console.error (
+          `Failed to parse respone JSON: ${error.message}`
+        );
       }
 
       if (
